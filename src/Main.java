@@ -1,3 +1,4 @@
+import sun.reflect.generics.tree.Tree;
 import sun.security.util.BitArray;
 
 
@@ -10,18 +11,15 @@ public class Main {
 
         Solution solution = new Solution();
 
-//        TreeNode tree1 = solution.buildTree1();
-//        TreeNode tree2 = solution.buildTree2();
+//        List<Integer> s = solution.selfDividingNumbers(1,22);
 //
-//        TreeNode treeMerge = solution.mergeTrees(tree1, tree2);
-//
-//        solution.recursion(treeMerge);
+//        for(Integer i : s){
+//            System.out.println(i);
+//        }
 
-        List<Integer> s = solution.selfDividingNumbers(1,22);
+        int[] a = {1,4,3,2};
 
-        for(Integer i : s){
-            System.out.println(i);
-        }
+        System.out.println(solution.arrayPairSum(a));
 
     }
 
@@ -31,9 +29,9 @@ class TreeNode{
 
     int val;
 
-    TreeNode leftChild;
+    TreeNode left;
 
-    TreeNode rightChild;
+    TreeNode right;
 
     TreeNode(int v){
         val = v;
@@ -42,7 +40,178 @@ class TreeNode{
 
 }
 
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+}
+
 class Solution {
+
+
+
+    public boolean isUnivalTree(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+
+        if(root.right!=null&&root.right.val!=root.val)
+            return false;
+
+        if(root.left!=null&&root.left.val!=root.val)
+            return false;
+
+        else
+            return isUnivalTree(root.left)&&isUnivalTree(root.right);
+    }
+
+    public List<Integer> postorder(Node root) {
+        List<Integer> result = new ArrayList<>();
+        if(root == null){
+            return result;
+        }
+
+        Queue<Node> q = new LinkedList<>();
+        ((LinkedList<Node>) q).push(root);
+
+        while(!q.isEmpty()){
+            Node node = q.poll();
+            result.add(node.val);
+            for(int i = 0; i<node.children.size(); i++){
+                ((LinkedList<Node>) q).push(node.children.get(i));
+            }
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+
+
+    public List<Integer> preorder(Node root) {
+        List<Integer> result = new ArrayList<>();
+        if(root == null){
+            return result;
+        }
+
+        Stack stack = new Stack();
+        stack.push(root);
+
+        while(!stack.isEmpty()){
+            Node node = (Node)stack.pop();
+            result.add(node.val);
+            for(int i = node.children.size()-1; i>=0; i--){
+                stack.push(node.children.get(i));
+            }
+        }
+        return result;
+    }
+
+    public TreeNode searchBST(TreeNode root, int val) {
+        TreeNode ptr = root;
+        while(ptr!=null){
+            if(val==ptr.val)
+                return ptr;
+            if(val<ptr.val)
+                ptr = ptr.left;
+            else if(val>ptr.val)
+                ptr = ptr.right;
+
+        }
+        return ptr;
+    }
+
+
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int sum = 0;
+        for(int i=0; i<nums.length; i+=2){
+            sum = sum+nums[i];
+        }
+        return sum;
+    }
+
+    public int minDeletionSize(String[] A) {
+        int arrLen = A.length;
+        int strLen = A[0].length();
+        if(arrLen==0 || strLen==0)
+            return 0;
+
+        int count = 0;
+        for(int i=0; i<strLen; i++){
+            for(int j = 0; j<arrLen-1; j++){
+                if(!(A[j].charAt(i)<=A[j+1].charAt(i))){
+                    count++;
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+
+    public int heightChecker(int[] heights) {
+
+        int[] ascendH = heights.clone();
+        Arrays.sort(ascendH);
+
+        int count = 0;
+        for (int i = 0; i < heights.length; i++) {
+            if (heights[i] != ascendH[i]) {
+                count++;
+            }
+        }
+        return count;
+
+
+    }
+
+
+
+    public int peakIndexInMountainArray(int[] A) {
+        int len = A.length;
+        int i = len/2;
+        int offset = len/4;
+
+        boolean found = false;
+        while(!found){
+            if(A[i-1]<A[i] && A[i]>A[i+1]){
+                found=true;
+                break;
+            }
+            else if(A[i-1]<A[i]){
+                i=i+offset;
+            }
+            else{
+                i=i-offset;
+            }
+            offset=offset/2;
+            if(offset==0)
+                offset = 1;
+        }
+        return A[i];
+    }
+
+    public int[] diStringMatch(String S) {
+        int len = S.length();
+        int[] result = new int[len+1];
+        int low = 0, high = len;
+
+        for(int i= 0; i<len; i++){
+            if(S.charAt(i)=='I')
+                result[i] = low++;
+            else
+                result[i] = high--;
+        }
+
+        result[len] = low;
+
+        return result;
+    }
 
     public List<Integer> selfDividingNumbers(int left, int right) {
         List<Integer> result = new ArrayList<>();
@@ -72,9 +241,9 @@ class Solution {
         TreeNode node1 = new TreeNode(3);
         TreeNode node2 = new TreeNode(2);
         TreeNode node11 = new TreeNode(5);
-        node1.leftChild = node11;
-        root.leftChild = node1;
-        root.rightChild = node2;
+        node1.left = node11;
+        root.left = node1;
+        root.right = node2;
 
         return root;
 
@@ -87,44 +256,45 @@ class Solution {
         TreeNode node2 = new TreeNode(3);
         TreeNode node12 = new TreeNode(4);
         TreeNode node22 = new TreeNode(7);
-        node1.rightChild = node12;
-        node2.rightChild = node22;
-        root.leftChild = node1;
-        root.rightChild = node2;
+        node1.right = node12;
+        node2.right = node22;
+        root.left = node1;
+        root.right = node2;
 
         return root;
     }
 
 
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-
-        Queue<TreeNode> q1 = new LinkedList<>();
-        Queue<TreeNode> q2 = new LinkedList<>();
-        q1.add(t1);
-        q2.add(t2);
-
-        while (!q1.isEmpty() && !q2.isEmpty()){
-
-            ((LinkedList<TreeNode>) q1).pop();
-
+        if(t1==null){
+            return t2;
         }
 
-        return null;
+        if(t2==null){
+            return t1;
+        }
+
+        t1.val = t1.val+t2.val;
+
+        t1.left = mergeTrees(t1.left,t2.left);
+        t1.right = mergeTrees(t1.right,t2.right);
+
+
+        return t1;
 
     }
 
-    public void recursion(TreeNode node){
+    public void printTree(TreeNode node){
 
-        if(node==null){
+        if(node == null){
             return;
         }
 
-
-        recursion(node.leftChild);
+        printTree(node.left);
         System.out.println(node.val);
-        recursion(node.rightChild);
-
+        printTree(node.right);
     }
+
 
 
     public int hammingDistance(int x, int y) {
