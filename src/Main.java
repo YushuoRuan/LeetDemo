@@ -17,9 +17,8 @@ public class Main {
 //            System.out.println(i);
 //        }
 
-        int[] a = {1,4,3,2};
 
-        System.out.println(solution.arrayPairSum(a));
+        System.out.println(solution.fib(4));
 
     }
 
@@ -54,7 +53,86 @@ class Node {
 
 class Solution {
 
+    public int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
 
+
+    }
+
+    public int numRookCaptures(char[][] board) {
+        int i, j=0;
+        for(i = 0; i<board.length; i++){
+            boolean found = false;
+            for(j = 0; j < board[i].length; j++){
+                if(board[i][j]=='R'){
+                    found = true;
+                    break;
+                }
+            }
+            if(found)
+                break;
+        }
+        int count = 0;
+        for(int u = i-1; u >= 0; u--){
+            if(board[u][j]=='B')
+                break;
+            if(board[u][j]=='p'){
+                count++;
+                break;
+            }
+        }
+        for(int d = i+1; d < board.length; d++){
+            if(board[d][j]=='B')
+                break;
+            if(board[d][j]=='p'){
+                count++;
+                break;
+            }
+        }
+        for(int l = j-1; l >= 0; l--){
+            if(board[i][l]=='B')
+                break;
+            if(board[i][l]=='p'){
+                count++;
+                break;
+            }
+        }
+        for(int r = j+1; r < board[0].length; r++){
+            if(board[i][r]=='B')
+                break;
+            if(board[i][r]=='p'){
+                count++;
+                break;
+            }
+        }
+        return count;
+    }
+
+    public int fib(int N) {
+        if(N==0)
+            return 0;
+        if(N==1)
+            return 1;
+
+        return fib(N-1)+fib(N-2);
+    }
+
+    public int[] sortArrayByParityII(int[] A) {
+        int[] result = new int[A.length];
+        int evenPos = 0;
+        int oddPos = 1;
+
+        for(int i: A){
+            if(i%2==0){
+                result[evenPos] = i;
+                evenPos+=2;
+            }
+            else{
+                result[oddPos] = i;
+                oddPos+=2;
+            }
+        }
+        return result;
+    }
 
     public boolean isUnivalTree(TreeNode root) {
         if(root == null){
