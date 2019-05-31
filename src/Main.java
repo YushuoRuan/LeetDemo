@@ -16,9 +16,14 @@ public class Main {
 //        for(Integer i : s){
 //            System.out.println(i);
 //        }
+        String[] A = {"cool","lock","cook"};
 
 
-        System.out.println(solution.fib(4));
+
+
+        List<String> s = solution.commonChars(A);
+
+
 
     }
 
@@ -53,9 +58,46 @@ class Node {
 
 class Solution {
 
+
+
+    public List<String> commonChars(String[] A) {
+        ArrayList<String> first = new ArrayList<String>(Arrays.asList(A[0].split("")));
+        Collections.sort(first);
+
+        for(int i = 0; i<first.size(); i++) {
+            String tmp = "";
+            for (int j = 1; j < A.length; j++) {
+                tmp = A[j];
+                A[j] = A[j].replaceFirst(first.get(i), "");
+                if(tmp.equals(A[j])){
+                    first.remove(i);
+                    i--;
+                    break;
+                }
+            }
+        }
+        return first;
+    }
+
     public int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
-
-
+        int[][] result = new int[R*C][2];
+        int index = 0;
+        for(int i = 0; i < R; i++){
+            for(int j = 0; j < C; j++){
+                result[index][0] = i;
+                result[index][1] = j;
+                index++;
+            }
+        }
+        Arrays.sort(result, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                Integer c1 = Math.abs(r0-o1[0])+Math.abs(c0-o1[1]);
+                Integer c2 = Math.abs(r0-o2[0])+Math.abs(c0-o2[1]);
+                return c1.compareTo(c2);
+            }
+        });
+        return result;
     }
 
     public int numRookCaptures(char[][] board) {
