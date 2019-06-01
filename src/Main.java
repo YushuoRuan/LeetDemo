@@ -11,18 +11,11 @@ public class Main {
 
         Solution solution = new Solution();
 
-//        List<Integer> s = solution.selfDividingNumbers(1,22);
-//
-//        for(Integer i : s){
-//            System.out.println(i);
-//        }
-        String[] A = {"cool","lock","cook"};
+        int[][] input = {{1,0},{0,2}};
 
+        int output = solution.projectionArea(input);
 
-
-
-        List<String> s = solution.commonChars(A);
-
+        System.out.println(output);
 
 
     }
@@ -58,7 +51,30 @@ class Node {
 
 class Solution {
 
-
+    public int projectionArea(int[][] grid) {
+        int xArea = 0, yArea = 0, zArea = 0;
+        for(int i = 0; i < grid[0].length; i++)
+        {
+            int xMax = 0;
+            for(int j = 0; j < grid.length; j++){
+                if(grid[j][i]>xMax)
+                    xMax = grid[j][i];
+                if(grid[j][i]!=0)
+                    zArea++;
+            }
+            xArea+=xMax;
+        }
+        for(int i = 0; i < grid.length; i++)
+        {
+            int yMax = 0;
+            for(int j = 0; j < grid[0].length; j++){
+                if(grid[i][j]>yMax)
+                    yMax = grid[i][j];
+            }
+            yArea+=yMax;
+        }
+        return xArea+yArea+zArea;
+    }
 
     public List<String> commonChars(String[] A) {
         ArrayList<String> first = new ArrayList<String>(Arrays.asList(A[0].split("")));
