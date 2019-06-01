@@ -6,13 +6,39 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-
-
+        String[] input = {"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"};
+        List<String> output = solution.subdomainVisits(input);
     }
 }
 
 class Solution {
-    
+
+    public List<String> subdomainVisits(String[] cpdomains) {
+        Map<String, Integer> map = new HashMap<>();
+        for(String s : cpdomains){
+            String[] tmp = s.split(" ");
+            int times = Integer.parseInt(tmp[0]);
+            String domain = tmp[1];
+            String[] domainArr = domain.split("\\.");
+            String subDomain = "";
+            for(int i = domainArr.length-1; i>=0; i--){
+                if(i==domainArr.length-1)
+                    subDomain = domainArr[i];
+                else
+                    subDomain = domainArr[i]+"."+subDomain;
+                if(map.containsKey(subDomain))
+                    map.replace(subDomain, map.get(subDomain)+times);
+                else
+                    map.put(subDomain, times);
+            }
+        }
+
+        List<String> result = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry : map.entrySet()){
+            result.add(entry.getValue().toString()+" "+entry.getKey());
+        }
+        return result;
+    }
 
     public int maxDepth(Node root) {
 
