@@ -1,3 +1,5 @@
+import sun.reflect.generics.tree.Tree;
+
 import java.util.*;
 
 public class Main {
@@ -6,12 +8,34 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        String[] input = {"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"};
-        List<String> output = solution.subdomainVisits(input);
+        int[] input = {0,10};
+        int output = solution.smallestRangeI(input, 2);
+        System.out.println(output);
     }
 }
 
 class Solution {
+
+    public List<TreeNode> list = new ArrayList<>();
+
+    public TreeNode increasingBST(TreeNode root) {
+
+    }
+
+    public void recursion =
+
+    public int smallestRangeI(int[] A, int K) {
+        if(A.length<2)
+            return 0;
+        int max = 0;
+        int min = 99999999;
+        for(int i : A){
+            if(i>max) max=i;
+            if(i<min) min=i;
+        }
+        int range = max-min-Math.abs(2*K);
+        return range>0?range:0;
+    }
 
     public List<String> subdomainVisits(String[] cpdomains) {
         Map<String, Integer> map = new HashMap<>();
