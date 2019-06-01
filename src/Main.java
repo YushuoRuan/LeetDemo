@@ -9,12 +9,23 @@ public class Main {
         Solution solution = new Solution();
         Builder builder = new Builder();
 
-        TreeNode input = builder.buildTree1();
-        TreeNode output = solution.increasingBST(input);
+        System.out.println(solution.reverseWords("Let's take LeetCode contest"));
     }
 }
 
 class Solution {
+
+    public String reverseWords(String s) {
+        String[] words= s.split(" ");
+        String result = "";
+        for(int i = 0; i<words.length-1; i++){
+            StringBuilder sb = new StringBuilder(words[i]);
+            result = result + sb.reverse().toString() + " ";
+        }
+        StringBuilder sb = new StringBuilder(words[words.length-1]);
+        result = result + sb.reverse().toString();
+        return result;
+    }
 
     public List<TreeNode> list = new ArrayList<>();
 
