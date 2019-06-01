@@ -1,8 +1,3 @@
-import sun.reflect.generics.tree.Tree;
-import sun.security.util.BitArray;
-
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
@@ -10,46 +5,59 @@ public class Main {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-
-        int[][] input = {{1,0},{0,2}};
-
-        int output = solution.projectionArea(input);
-
-        System.out.println(output);
+        Builder builder = new Builder();
 
 
-    }
-
-}
-
-class TreeNode{
-
-    int val;
-
-    TreeNode left;
-
-    TreeNode right;
-
-    TreeNode(int v){
-        val = v;
-    }
-
-
-}
-
-class Node {
-    public int val;
-    public List<Node> children;
-
-    public Node() {}
-
-    public Node(int _val,List<Node> _children) {
-        val = _val;
-        children = _children;
     }
 }
 
 class Solution {
+    
+
+    public int maxDepth(Node root) {
+
+        if(root == null){
+            return 0;
+        }
+        if(root.children==null){
+            return 1;
+        }
+        int max = 0;
+        for(Node children: root.children){
+            int currD = maxDepth(children);
+            if(currD>max)
+                max = currD;
+        }
+        return max+1;
+    }
+
+    public int maxDepthStack(Node root) {
+
+        if(root == null)
+            return 0;
+
+        Stack<Node> nodes = new Stack<>();
+        Stack<Integer> depths = new Stack<>();
+        nodes.push(root);
+        depths.push(1);
+
+        int maxD = 0;
+        while(!nodes.isEmpty()){
+            Node currNode = nodes.pop();
+            Integer currDepth = depths.pop();
+            if(currDepth>maxD)
+                maxD = currDepth;
+            if(currNode.children==null)
+                continue;
+            for(Node n: currNode.children){
+                nodes.push(n);
+                depths.push(currDepth+1);
+            }
+        }
+
+        return maxD;
+
+    }
 
     public int projectionArea(int[][] grid) {
         int xArea = 0, yArea = 0, zArea = 0;
@@ -371,34 +379,6 @@ class Solution {
         return result;
     }
 
-    public TreeNode buildTree1(){
-
-        TreeNode root = new TreeNode(1);
-        TreeNode node1 = new TreeNode(3);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node11 = new TreeNode(5);
-        node1.left = node11;
-        root.left = node1;
-        root.right = node2;
-
-        return root;
-
-    }
-
-    public TreeNode buildTree2(){
-
-        TreeNode root = new TreeNode(2);
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(3);
-        TreeNode node12 = new TreeNode(4);
-        TreeNode node22 = new TreeNode(7);
-        node1.right = node12;
-        node2.right = node22;
-        root.left = node1;
-        root.right = node2;
-
-        return root;
-    }
 
 
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
@@ -648,4 +628,82 @@ class Solution {
     }
 
 
+}
+
+class Builder{
+    public TreeNode buildTree1(){
+
+        TreeNode root = new TreeNode(1);
+        TreeNode node1 = new TreeNode(3);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node11 = new TreeNode(5);
+        node1.left = node11;
+        root.left = node1;
+        root.right = node2;
+
+        return root;
+
+    }
+
+    public TreeNode buildTree2(){
+
+        TreeNode root = new TreeNode(2);
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(3);
+        TreeNode node12 = new TreeNode(4);
+        TreeNode node22 = new TreeNode(7);
+        node1.right = node12;
+        node2.right = node22;
+        root.left = node1;
+        root.right = node2;
+
+        return root;
+    }
+
+    public Node buildNTree(){
+        Node n7 = new Node(7, null);
+        Node n8 = new Node(8, null);
+        List<Node> c4 = new ArrayList<>();
+        c4.add(n7); c4.add(n8);
+
+        Node n5 = new Node(5, null);
+        Node n6 = new Node(6, c4);
+        List<Node> c3 = new ArrayList<>();
+        c3.add(n5); c3.add(n6);
+
+        Node n3 = new Node(3, c3);
+        Node n2 = new Node(2, c3);
+        Node n4 = new Node(4, null);
+        List<Node> c1 = new ArrayList<>();
+        c1.add(n3); c1.add(n2); c1.add(n4);
+        Node n1 = new Node(1, c1);
+        return n1;
+    }
+}
+
+class TreeNode{
+
+    int val;
+
+    TreeNode left;
+
+    TreeNode right;
+
+    TreeNode(int v){
+        val = v;
+    }
+
+
+}
+
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
 }
