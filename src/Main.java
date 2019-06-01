@@ -8,9 +8,9 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        int[] input = {0,10};
-        int output = solution.smallestRangeI(input, 2);
-        System.out.println(output);
+
+        TreeNode input = builder.buildTree1();
+        TreeNode output = solution.increasingBST(input);
     }
 }
 
@@ -19,10 +19,23 @@ class Solution {
     public List<TreeNode> list = new ArrayList<>();
 
     public TreeNode increasingBST(TreeNode root) {
-
+        recursion(root);
+        TreeNode leftmost = list.get(0);
+        TreeNode currNode = leftmost;
+        for(int i = list.size()-2; i>=0; i--){
+            list.get(i).right = list.get(i+1);
+        }
+        return list.get(0);
     }
 
-    public void recursion =
+    public void recursion(TreeNode node){
+        if(node == null)
+            return;
+        recursion(node.left);
+        TreeNode newNode = new TreeNode(node.val);
+        list.add(newNode);
+        recursion(node.right);
+    }
 
     public int smallestRangeI(int[] A, int K) {
         if(A.length<2)
@@ -683,11 +696,13 @@ class Solution {
 class Builder{
     public TreeNode buildTree1(){
 
-        TreeNode root = new TreeNode(1);
+        TreeNode root = new TreeNode(5);
         TreeNode node1 = new TreeNode(3);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node11 = new TreeNode(5);
+        TreeNode node2 = new TreeNode(6);
+        TreeNode node11 = new TreeNode(2);
+        TreeNode node12 = new TreeNode(4);
         node1.left = node11;
+        node1.right = node12;
         root.left = node1;
         root.right = node2;
 
