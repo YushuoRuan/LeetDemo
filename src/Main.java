@@ -9,11 +9,24 @@ public class Main {
         Solution solution = new Solution();
         Builder builder = new Builder();
 
-        System.out.println(solution.reverseWords("Let's take LeetCode contest"));
+
     }
 }
 
 class Solution {
+
+    public ListNode middleNode(ListNode head) {
+        ListNode currNode = head;
+        ListNode middle = head;
+        int i = 0;
+        while(currNode.next != null){
+            currNode = currNode.next;
+            i++;
+            if(i%2==1)
+                middle = middle.next;
+        }
+        return middle;
+    }
 
     public int fixedPoint(int[] A) {
         int i = 0;
@@ -792,4 +805,10 @@ class Node {
         val = _val;
         children = _children;
     }
+}
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
 }
