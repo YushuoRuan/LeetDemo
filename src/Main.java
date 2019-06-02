@@ -15,6 +15,16 @@ public class Main {
 
 class Solution {
 
+    public int fixedPoint(int[] A) {
+        int i = 0;
+        while(i<A.length){
+            if(A[i]==i)
+                break;
+            i++;
+        }
+        return (i==A.length)?-1:i;
+    }
+
     public String reverseWords(String s) {
         String[] words= s.split(" ");
         String result = "";
