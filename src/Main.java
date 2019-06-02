@@ -15,6 +15,24 @@ public class Main {
 
 class Solution {
 
+
+    public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
+        int evenSum = 0;
+        for(int i : A){
+            if(i%2==0) evenSum += i;
+        }
+        int[] result = new int[queries.length];
+        for(int i = 0; i<queries.length; i++){
+            int oldNum = A[queries[i][1]];
+            int newNum = oldNum+queries[i][0];
+            if(Math.abs(oldNum)%2==0) evenSum = (newNum%2 == 0)?evenSum+queries[i][0]:evenSum-oldNum;
+            if(Math.abs(oldNum)%2==1) evenSum = (newNum%2 == 0)?evenSum+newNum:evenSum;
+            result[i] = evenSum;
+            A[queries[i][1]] = newNum;
+        }
+        return result;
+    }
+
     public ListNode middleNode(ListNode head) {
         ListNode currNode = head;
         ListNode middle = head;
