@@ -8,12 +8,40 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
+        String S = "abaa";
+        char C = 'b';
+        int [] output = solution.shortestToChar(S,C);
 
 
     }
 }
 
 class Solution {
+
+    public int[] shortestToChar(String S, char C) {
+
+        List<Integer> mI = new ArrayList<>();
+        int[] result = new int[S.length()];
+        for(int i = 0; i < S.length(); i++){
+            if(S.charAt(i) == C)
+                mI.add(i);
+        }
+        for(int i = 0; i < mI.get(0); i++){
+            result[i] = mI.get(0)-i;
+        }
+        for(int i = 1; i < mI.size(); i++){
+            int interval = mI.get(i)-mI.get(i-1);
+            for(int j = 1; j<interval; j++)
+                if(j<=interval/2)
+                    result[mI.get(i-1)+j] = j;
+                else
+                    result[mI.get(i-1)+j] = interval-j;
+        }
+        for(int i = mI.get(mI.size()-1)+1; i<S.length(); i++){
+            result[i] = i - mI.get(mI.size()-1);
+        }
+        return result;
+    }
 
     public int[][] transpose(int[][] A) {
         int row = A.length;
