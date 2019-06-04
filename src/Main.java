@@ -8,15 +8,38 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        String S = "abaa";
-        char C = 'b';
-        int [] output = solution.shortestToChar(S,C);
-
+        char[] input = {'h','e','l','l','o'};
+        solution.reverseString(input);
+        System.out.println(input);
 
     }
 }
 
 class Solution {
+
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> vals1 = new ArrayList<>();
+        List<Integer> vals2 = new ArrayList<>();
+        recursion(root1, vals1);
+        recursion(root2, );
+
+    }
+    public void recursion(TreeNode node, List<Integer> vals){
+        if(node == null)
+            return;
+        recursion(node.left);
+        if(node.left == null && node.right==null)
+            vals.add(node.val);
+        recursion(node.right);
+    }
+
+    public void reverseString(char[] s) {
+        for(int i = 0; i<s.length/2; i++){
+            char tmp = s[i];
+            s[i] = s[s.length-1-i];
+            s[s.length-1-i] = tmp;
+        }
+    }
 
     public int[] shortestToChar(String S, char C) {
 
