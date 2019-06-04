@@ -16,6 +16,24 @@ public class Main {
 
 class Solution {
 
+    public int lastStoneWeight(int[] stones) {
+
+        PriorityQueue<Integer> queue= new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+        for(int i : stones)
+            queue.add(i);
+        while(queue.size()>1){
+            int newStone = Math.abs(queue.poll()-queue.poll());
+            if(newStone!=0)
+                queue.add(newStone);
+        }
+        return queue.poll();
+    }
+
     public int[] numberOfLines(int[] widths, String S) {
         int[] result = new int[2];
         int lineCount = 1;
