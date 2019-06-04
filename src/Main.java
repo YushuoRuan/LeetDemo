@@ -8,20 +8,27 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        char[] input = {'h','e','l','l','o'};
-        solution.reverseString(input);
-        System.out.println(input);
-
+        int[] input = {2,7,4,1,8,1};
+        int output = solution.lastStoneWeight(input);
+        System.out.println(output);
     }
 }
 
 class Solution {
 
+
+
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         List<Integer> vals1 = new ArrayList<>();
         List<Integer> vals2 = new ArrayList<>();
         recursion(root1, vals1);
-        recursion(root2, );
+        recursion(root2, vals2);
+        if(vals1.size()!=vals2.size()) return false;
+        for(int i = 0; i<vals1.size(); i++){
+            if(vals1.get(i)!=vals2.get(i))
+                return false;
+        }
+        return true;
 
     }
     public void recursion(TreeNode node, List<Integer> vals){
