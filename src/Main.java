@@ -16,7 +16,22 @@ public class Main {
 
 class Solution {
 
-
+    public int[] numberOfLines(int[] widths, String S) {
+        int[] result = new int[2];
+        int lineCount = 1;
+        int currWidth = 0;
+        for(int i = 0; i<S.length(); i++){
+            int charWidth = widths[S.charAt(i)-97];
+            if(currWidth+charWidth>100){
+                lineCount++;
+                currWidth=0;
+            }
+            currWidth+=charWidth;
+        }
+        result[0] = lineCount;
+        result[1] = currWidth;
+        return result;
+    }
 
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         List<Integer> vals1 = new ArrayList<>();
