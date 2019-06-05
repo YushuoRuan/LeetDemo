@@ -16,6 +16,52 @@ public class Main {
 
 class Solution {
 
+    public String[] findWords(String[] words) {
+        Map<Character, Integer> keyBoard = new HashMap<>();
+        keyBoard.put('Q',1);
+        keyBoard.put('W',1);
+        keyBoard.put('E',1);
+        keyBoard.put('R',1);
+        keyBoard.put('T',1);
+        keyBoard.put('Y',1);
+        keyBoard.put('U',1);
+        keyBoard.put('I',1);
+        keyBoard.put('O',1);
+        keyBoard.put('P',1);
+        keyBoard.put('A',2);
+        keyBoard.put('S',2);
+        keyBoard.put('D',2);
+        keyBoard.put('F',2);
+        keyBoard.put('G',2);
+        keyBoard.put('H',2);
+        keyBoard.put('J',2);
+        keyBoard.put('K',2);
+        keyBoard.put('L',2);
+        keyBoard.put('Z',3);
+        keyBoard.put('X',3);
+        keyBoard.put('C',3);
+        keyBoard.put('V',3);
+        keyBoard.put('B',3);
+        keyBoard.put('N',3);
+        keyBoard.put('M',3);
+
+        List<String> result = new ArrayList<>();
+        for(String word : words){
+            String wordU = word.toUpperCase();
+            boolean oneline = true;
+            for(int i = 1; i<wordU.length(); i++){
+                if(keyBoard.get(wordU.charAt(i))!=keyBoard.get(wordU.charAt(i-1))){
+                    oneline = false;
+                    break;
+                }
+            }
+            if(oneline)
+                result.add(word);
+        }
+        String[] result2 = new String[result.size()];
+        return result.toArray(result2);
+    }
+
     public int findComplement(int num) {
         int length = Long.toBinaryString(num).length();
         return (int)((long)Math.pow(2,length)-1)-num;
