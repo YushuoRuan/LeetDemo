@@ -8,16 +8,35 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        int[] input = {2,7,4,1,8,1};
-        int output = solution.lastStoneWeight(input);
-        System.out.println(output);
+        String[] input = {"Hello", "Alaska", "Dad", "Peace"};
+        String[] output = solution.findWords(input);
+        solution.findWords(null);
     }
 }
 
 class Solution {
 
-    public int lastStoneWeight(int[] stones) {
 
+    public String removeDuplicates(String S) {
+        int i = 1;
+        int pos = 0;
+        StringBuilder sb = new StringBuilder(S);
+        while(i<sb.length()){
+            if(sb.charAt(i)==sb.charAt(i-1)){
+                int head = i-2;
+                int tail = i+1;
+                while((head>=0&&tail<sb.length())&&(sb.charAt(head)==sb.charAt(tail))) {
+                    head--; tail++;
+                }
+                sb.replace(head+1, tail, "");
+                i=head+1;
+            }
+            i++;
+        }
+        return sb.toString();
+    }
+
+    public int lastStoneWeight(int[] stones) {
         PriorityQueue<Integer> queue= new PriorityQueue<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
@@ -31,7 +50,7 @@ class Solution {
             if(newStone!=0)
                 queue.add(newStone);
         }
-        return queue.poll();
+        return queue.isEmpty()?0:queue.poll();
     }
 
     public int[] numberOfLines(int[] widths, String S) {
