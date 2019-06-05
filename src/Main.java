@@ -16,6 +16,24 @@ public class Main {
 
 class Solution {
 
+    public boolean isToeplitzMatrix(int[][] matrix) {
+        int row=matrix.length,col=matrix[0].length;
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                if(j!=0&&i!=0)
+                {
+                    if(matrix[i][j]!=matrix[i-1][j-1])
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public String[] findWords(String[] words) {
         Map<Character, Integer> keyBoard = new HashMap<>();
         keyBoard.put('Q',1);
