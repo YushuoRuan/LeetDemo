@@ -8,13 +8,56 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        String[] input = {"Hello", "Alaska", "Dad", "Peace"};
-        String[] output = solution.findWords(input);
-        solution.findWords(null);
+        String[] input = {"17304","-13583","+","+","12744","+","C","9386","C","27203","+","C","-1919","18293","12229","11052","22330","18748","19103","+","-19500","-9090","D","27598","1550","28317","D","-15011","C","C","D","-4724","17815","D","+","C","-8950","-843","19326","19037","C","28524","-12537","C","+","D","1207","2318","-88","-19769"};
+        int output = solution.calPoints(input);
+        System.out.println(output);
     }
 }
 
 class Solution {
+
+    public int calPoints(String[] ops) {
+        int valid1 = 0;
+        int valid2 = 0;
+        int sum = 0;
+        for(int i = 0; i<ops.length; i++){
+            String o = ops[i];
+            switch (o){
+                case "C":
+                    sum-=Integer.parseInt(ops[valid2]);
+                    ops[valid2] = "I";
+                    valid2 = valid1;
+                    if(valid1>0)
+                        valid1--;
+                    while(valid1>0&&ops[valid1]=="I")
+                        valid1--;
+                    ops[i] = "I";
+                    break;
+                case "D":
+                    ops[i] = Integer.toString(Integer.parseInt(ops[valid2])*2);
+                    sum+=Integer.parseInt(ops[i]);
+                    valid1 = valid2;
+                    valid2=i;
+                    break;
+                case "+":
+                    System.out.println(i);
+                    System.out.println(valid1+": "+ops[valid1]);
+                    System.out.println(valid2+": "+ops[valid2]);
+                    ops[i] = Integer.toString(Integer.parseInt(ops[valid1])+Integer.parseInt(ops[valid2]));
+                    sum+=Integer.parseInt(ops[i]);
+                    valid1 = valid2;
+                    valid2=i;
+                    break;
+                default:
+                    sum += Integer.parseInt(o);
+                    valid1 = valid2;
+                    valid2=i;
+                    break;
+
+            }
+        }
+        return sum;
+    }
 
     public boolean isToeplitzMatrix(int[][] matrix) {
         int row=matrix.length,col=matrix[0].length;
@@ -32,6 +75,48 @@ class Solution {
             }
         }
         return true;
+    }
+
+
+    public int findComplement(int num) {
+        int length = Long.toBinaryString(num).length();
+        return (int)((long)Math.pow(2,length)-1)-num;
+    }
+
+    public String removeDuplicates(String S) {
+        int i = 1;
+        int pos = 0;
+        StringBuilder sb = new StringBuilder(S);
+        while(i<sb.length()){
+            if(sb.charAt(i)==sb.charAt(i-1)){
+                int head = i-2;
+                int tail = i+1;
+                while((head>=0&&tail<sb.length())&&(sb.charAt(head)==sb.charAt(tail))) {
+                    head--; tail++;
+                }
+                sb.replace(head+1, tail, "");
+                i=head+1;
+            }
+            i++;
+        }
+        return sb.toString();
+    }
+
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> queue= new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+        for(int i : stones)
+            queue.add(i);
+        while(queue.size()>1){
+            int newStone = Math.abs(queue.poll()-queue.poll());
+            if(newStone!=0)
+                queue.add(newStone);
+        }
+        return queue.isEmpty()?0:queue.poll();
     }
 
     public String[] findWords(String[] words) {
@@ -78,47 +163,6 @@ class Solution {
         }
         String[] result2 = new String[result.size()];
         return result.toArray(result2);
-    }
-
-    public int findComplement(int num) {
-        int length = Long.toBinaryString(num).length();
-        return (int)((long)Math.pow(2,length)-1)-num;
-    }
-
-    public String removeDuplicates(String S) {
-        int i = 1;
-        int pos = 0;
-        StringBuilder sb = new StringBuilder(S);
-        while(i<sb.length()){
-            if(sb.charAt(i)==sb.charAt(i-1)){
-                int head = i-2;
-                int tail = i+1;
-                while((head>=0&&tail<sb.length())&&(sb.charAt(head)==sb.charAt(tail))) {
-                    head--; tail++;
-                }
-                sb.replace(head+1, tail, "");
-                i=head+1;
-            }
-            i++;
-        }
-        return sb.toString();
-    }
-
-    public int lastStoneWeight(int[] stones) {
-        PriorityQueue<Integer> queue= new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2-o1;
-            }
-        });
-        for(int i : stones)
-            queue.add(i);
-        while(queue.size()>1){
-            int newStone = Math.abs(queue.poll()-queue.poll());
-            if(newStone!=0)
-                queue.add(newStone);
-        }
-        return queue.isEmpty()?0:queue.poll();
     }
 
     public int[] numberOfLines(int[] widths, String S) {
