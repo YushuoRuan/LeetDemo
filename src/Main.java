@@ -16,6 +16,10 @@ public class Main {
 
 class Solution {
 
+    public int findComplement(int num) {
+        int length = Long.toBinaryString(num).length();
+        return (int)((long)Math.pow(2,length)-1)-num;
+    }
 
     public String removeDuplicates(String S) {
         int i = 1;
