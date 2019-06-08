@@ -8,14 +8,43 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        int[][] input = {{1}};
-        int output = solution.uncommonFromSentences(input);
+        int[][] input = {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}};
+        int output = solution.maxIncreaseKeepingSkyline(input);
         System.out.println(output);
     }
 }
 
 class Solution {
 
+    public int maxIncreaseKeepingSkyline(int[][] grid) {
+        int[] hMax = new int[grid.length];
+        int[] vMax = new int[grid[0].length];
+
+        for(int i = 0; i < grid[0].length; i++) {
+            int xMax = 0;
+            for(int j = 0; j < grid.length; j++) {
+                if (grid[j][i] > xMax)
+                    xMax = grid[j][i];
+
+            }
+            vMax[i] = xMax;
+        }
+        for(int i = 0; i < grid.length; i++) {
+            int yMax = 0;
+            for(int j = 0; j < grid[0].length; j++){
+                if(grid[i][j]>yMax)
+                    yMax = grid[i][j];
+            }
+            hMax[i] = yMax;
+        }
+        int change = 0;
+        for(int i = 0; i<grid.length; i++){
+            for(int j = 0; j<grid[i].length; j++){
+                change+=(hMax[j]<vMax[i]?hMax[j]:vMax[i])-grid[i][j];
+            }
+        }
+        return change;
+    }
 
     public TreeNode trimBST(TreeNode root, int L, int R) {
         if(root == null)
