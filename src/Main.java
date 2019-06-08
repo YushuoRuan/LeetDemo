@@ -8,13 +8,15 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        String[] input = {"17304","-13583","+","+","12744","+","C","9386","C","27203","+","C","-1919","18293","12229","11052","22330","18748","19103","+","-19500","-9090","D","27598","1550","28317","D","-15011","C","C","D","-4724","17815","D","+","C","-8950","-843","19326","19037","C","28524","-12537","C","+","D","1207","2318","-88","-19769"};
-        int output = solution.calPoints(input);
+        int[][] input = {{1}};
+        int output = solution.uncommonFromSentences(input);
         System.out.println(output);
     }
 }
 
 class Solution {
+
+
 
     public int calPoints(String[] ops) {
         int valid1 = 0;
