@@ -17,6 +17,15 @@ public class Main {
 class Solution {
 
 
+    public int maxDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+
+        int leftD = maxDepth(root.left);
+        int rightD = maxDepth(root.right);
+        return leftD>rightD?leftD+1:rightD+1;
+    }
+
     public int islandPerimeter(int[][] grid) {
         int counter = 0;
         for(int i = 0; i<grid.length; i++){
