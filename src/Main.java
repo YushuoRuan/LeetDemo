@@ -17,6 +17,33 @@ public class Main {
 class Solution {
 
 
+    public String[] uncommonFromSentences(String A, String B) {
+
+        Map<String, Integer> map = new HashMap<>();
+        String[] a = A.split(" ");
+        String[] b = B.split(" ");
+
+        for(String s : a){
+            if(map.containsKey(s))
+                map.replace(s, map.get(s)+1);
+            else
+                map.put(s,1);
+        }
+        for(String s : b){
+            if(map.containsKey(s))
+                map.replace(s, map.get(s)+1);
+            else
+                map.put(s,1);
+        }
+        List<String> l = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry : map.entrySet()){
+            if(entry.getValue() == 1)
+                l.add(entry.getKey());
+        }
+        String[] result = new String[l.size()];
+        return l.toArray(result);
+    }
+
     public int maxDepth(TreeNode root) {
         if(root == null)
             return 0;
