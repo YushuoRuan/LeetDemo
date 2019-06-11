@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="960f3518-7e8f-4d52-a632-55f3a0f423bc" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/Builder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/Builder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/ListNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/ListNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/Solution$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/Solution$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/Solution$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/Solution$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/Solution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetDemo/TreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetDemo/TreeNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,8 +26,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="19" column="32" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="32" />
+            <state relative-caret-position="2">
+              <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -33,6 +41,7 @@
     <findStrings>
       <find>dgfa l;[sdfkgsad;fg;gfsdfkgs;flgks'f;gll[p]'fdbv g;'lbfgds ;plk</find>
       <find>replace</find>
+      <find>queue</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -46,8 +55,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="-20" />
+    <option name="x" value="112" />
+    <option name="y" value="-24" />
     <option name="width" value="1080" />
     <option name="height" value="1056" />
   </component>
@@ -57,10 +66,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -104,7 +113,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -114,17 +122,17 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28879312" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29162133" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.036674816" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12591687" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.1875" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.18534483" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -139,7 +147,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="48" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>13</line>
+          <properties />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -148,6 +164,16 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="738">
@@ -277,8 +303,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="19" column="32" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="32" />
+        <state relative-caret-position="2">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

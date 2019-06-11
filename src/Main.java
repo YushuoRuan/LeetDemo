@@ -8,14 +8,35 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        int[] input = {1,1,2,3};
-        int output = solution.distributeCandies(input);
+        int[] input1 = {4,1,2};
+        int[] input2 = {1,3,4,2};
+        int[] output = solution.nextGreaterElement(input1, input2);
         System.out.println(output);
 
     }
 }
 
 class Solution {
+
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] result = new int[nums1.length];
+        List<Integer> l = new ArrayList<>();
+        for(int i : nums2){
+            l.add(i);
+        }
+        for(int i = 0; i<nums1.length; i++){
+            result[i] = -1;
+            int index = l.indexOf(nums1[i]);
+            for(int j = index+1; j < nums2.length; j++){
+                if(nums2[j] > nums1[i]){
+                    result[i] = nums2[j];
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
 
     public int distributeCandies(int[] candies) {
 
@@ -43,6 +64,12 @@ class Solution {
             result = i;
         }
         return result;
+
+//        int result = 0;
+//        for (int num: nums) {
+//            result ^= num;
+//        }
+//        return result;
     }
 
     public int maxIncreaseKeepingSkyline(int[][] grid) {
@@ -1106,90 +1133,4 @@ class Solution {
     }
 
 
-}
-
-class Builder{
-    public TreeNode buildTree1(){
-
-        TreeNode root = new TreeNode(5);
-        TreeNode node1 = new TreeNode(3);
-        TreeNode node2 = new TreeNode(6);
-        TreeNode node11 = new TreeNode(2);
-        TreeNode node12 = new TreeNode(4);
-        node1.left = node11;
-        node1.right = node12;
-        root.left = node1;
-        root.right = node2;
-
-        return root;
-
-    }
-
-    public TreeNode buildTree2(){
-
-        TreeNode root = new TreeNode(2);
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(3);
-        TreeNode node12 = new TreeNode(4);
-        TreeNode node22 = new TreeNode(7);
-        node1.right = node12;
-        node2.right = node22;
-        root.left = node1;
-        root.right = node2;
-
-        return root;
-    }
-
-    public Node buildNTree(){
-        Node n7 = new Node(7, null);
-        Node n8 = new Node(8, null);
-        List<Node> c4 = new ArrayList<>();
-        c4.add(n7); c4.add(n8);
-
-        Node n5 = new Node(5, null);
-        Node n6 = new Node(6, c4);
-        List<Node> c3 = new ArrayList<>();
-        c3.add(n5); c3.add(n6);
-
-        Node n3 = new Node(3, c3);
-        Node n2 = new Node(2, c3);
-        Node n4 = new Node(4, null);
-        List<Node> c1 = new ArrayList<>();
-        c1.add(n3); c1.add(n2); c1.add(n4);
-        Node n1 = new Node(1, c1);
-        return n1;
-    }
-}
-
-class TreeNode{
-
-    int val;
-
-    TreeNode left;
-
-    TreeNode right;
-
-    TreeNode(int v){
-        val = v;
-    }
-
-
-}
-
-class Node {
-    public int val;
-    public List<Node> children;
-
-    public Node() {}
-
-    public Node(int _val,List<Node> _children) {
-        val = _val;
-        children = _children;
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
 }
