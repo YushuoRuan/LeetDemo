@@ -9,13 +9,24 @@ public class Main {
         Solution solution = new Solution();
         Builder builder = new Builder();
         int[] input = {1,1,2,3};
-        int output = solution.singleNumber(input);
+        int output = solution.distributeCandies(input);
         System.out.println(output);
 
     }
 }
 
 class Solution {
+
+    public int distributeCandies(int[] candies) {
+
+        Set<Integer> hs = new HashSet<>();
+        for(int i : candies){
+            hs.add(i);
+        }
+        int max = candies.length/2;
+        int kind = hs.size();
+        return kind<max?kind:max;
+    }
 
     public int singleNumber(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
