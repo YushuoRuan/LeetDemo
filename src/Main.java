@@ -8,13 +8,31 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        int[][] input = {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}};
-        int output = solution.maxIncreaseKeepingSkyline(input);
+        int[] input = {1,1,2,3};
+        int output = solution.singleNumber(input);
         System.out.println(output);
+
     }
 }
 
 class Solution {
+
+    public int singleNumber(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        HashSet<Integer> hs = new HashSet<>();
+        for(int i : nums){
+            if(hs.contains(i))
+                hs.remove(i);
+            else
+                hs.add(i);
+
+        }
+        int result = -1;
+        for(Integer i : hs){
+            result = i;
+        }
+        return result;
+    }
 
     public int maxIncreaseKeepingSkyline(int[][] grid) {
         int[] hMax = new int[grid.length];
