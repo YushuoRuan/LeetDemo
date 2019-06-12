@@ -1,6 +1,7 @@
 import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public class Main {
 
@@ -8,15 +9,61 @@ public class Main {
 
         Solution solution = new Solution();
         Builder builder = new Builder();
-        int[] input1 = {4,1,2};
-        int[] input2 = {1,3,4,2};
-        int[] output = solution.nextGreaterElement(input1, input2);
+        List<String> output= solution.fizzBuzz(15);
         System.out.println(output);
-
     }
 }
 
 class Solution {
+
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> resultList = new ArrayList<>();
+        levelOrder(resultList, root, 0);
+        return resultList;
+        }
+
+    public void levelOrder(List<List<Integer>> resultList, Node root, int level){
+
+        if(root!=null){
+            if(level>=resultList.size())
+            {
+                resultList.add(new ArrayList());
+            }
+            resultList.get(level).add(root.val);
+
+            for(Node node:root.children){
+                levelOrder(resultList, node,level+1);
+            }
+        }
+    }
+
+    public List<List<Integer>> levelOrderQueue(Node root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root==null){
+            return result;
+        }
+        Queue<Node> nodeQ = new LinkedList<>();
+        Queue<Integer> levelQ = new LinkedList<>();
+        ((LinkedList<Node>) nodeQ).add(root);
+        ((LinkedList<Integer>) levelQ).add(1);
+        List<Integer> currList = new ArrayList<>();
+        while(!nodeQ.isEmpty()){
+            Node currNode = nodeQ.poll();
+            Integer currLevel = levelQ.poll();
+            if(currNode.children!=null) {
+                for (Node child : currNode.children) {
+                    ((LinkedList<Node>) nodeQ).add(child);
+                    ((LinkedList<Integer>) levelQ).add(currLevel+1);
+                }
+            }
+            currList.add(currNode.val);
+            if(levelQ.peek()!=currLevel){
+                result.add(currList);
+                currList = new ArrayList<>();
+            }
+        }
+        return result;
+    }
 
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int[] result = new int[nums1.length];

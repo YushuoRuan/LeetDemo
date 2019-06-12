@@ -34,18 +34,14 @@ public class Builder{
     }
 
     public Node buildNTree(){
-        Node n7 = new Node(7, null);
-        Node n8 = new Node(8, null);
-        List<Node> c4 = new ArrayList<>();
-        c4.add(n7); c4.add(n8);
 
         Node n5 = new Node(5, null);
-        Node n6 = new Node(6, c4);
+        Node n6 = new Node(6, null);
         List<Node> c3 = new ArrayList<>();
         c3.add(n5); c3.add(n6);
 
         Node n3 = new Node(3, c3);
-        Node n2 = new Node(2, c3);
+        Node n2 = new Node(2, null);
         Node n4 = new Node(4, null);
         List<Node> c1 = new ArrayList<>();
         c1.add(n3); c1.add(n2); c1.add(n4);
